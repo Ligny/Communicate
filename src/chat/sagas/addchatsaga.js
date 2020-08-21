@@ -5,21 +5,10 @@ import {
     REQUEST_ADD_MESSAGE,
 } from '../actions/chataction';
 
-function submitMessage(data, user, conv) {
-    const currentmessage = {username: user, message: data.message}
-    if (conv) {
-        conv.push(currentmessage);
-    } else {
-    }
-    return conv;
-}
-
 function* configAddMessageSaga(action) {
     try {
-        const State = yield select();
         const { data } = action.payload;
-        const list = yield call(submitMessage, data, State.loginState.user, State.messageState.message);
-        const payload = { message: list}
+        const payload = { message: data}
         yield put(addMessage(payload));
     } catch (error) {
         console.log(error);

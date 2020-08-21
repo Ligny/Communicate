@@ -21,9 +21,10 @@ export default function FetchingStateUser(state = initialState, action) {
         }
         case ADD_MESSAGE: {
             const { message } = action.payload;
+            state.message.push(message);
             return {
                 ...state,
-                message: [...message],
+                message: state.message,
                 status: 'message_sent',
             };
         }
@@ -35,9 +36,10 @@ export default function FetchingStateUser(state = initialState, action) {
         }
         case DELETE_MESSAGE: {
             const { message } = action.payload;
+            state.message.splice(message, 1);
             return {
                 ...state,
-                message: [...message],
+                message: state.message,
                 status: 'message_deleted',
             };
         }

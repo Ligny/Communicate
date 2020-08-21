@@ -23,7 +23,7 @@ const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) 
                 <hr/>
             </div>
         ));
-    }, [elem.messageState.message]);
+    }, [elem.messageState]);
 
     const handleDelete = (key, username)  => {
         if(username === elem.loginState.user) {
@@ -37,7 +37,7 @@ const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) 
     }
 
     const submit = (data) => {
-        requestAddMessage(data);
+        requestAddMessage({username: elem.loginState.user, message: data.message});
         reset(defaultValue);
     }
 

@@ -5,17 +5,10 @@ import {
     REQUEST_DELETE_MESSAGE,
 } from '../actions/chataction';
 
-function eraseMessage(key, conv) {
-    conv.splice(key, 1);
-    return conv;
-}
-
 function* configDeleteMessageSaga(action) {
     try {
-        const State = yield select();
         const key = action.payload;
-        const list = yield call(eraseMessage, key, State.messageState.message);
-        const payload = { message: list}
+        const payload = { message: key}
         yield put(deleteMessage(payload));
     } catch (error) {
         console.log(error);
