@@ -7,35 +7,26 @@ const defaultValue = {
     username: '',
 };
 
-const Login = ({ log, apiRequestGetuser, loginRequest }) => {
+const Signup = ({ state, signupRequest }) => {
 
     const { register, handleSubmit, errors, reset } = useForm();
 
     const history = useHistory();
 
-    useEffect(() => {
-        apiRequestGetuser();
-    }, []);
+    const submit = (data) => {
+        signupRequest(data);
+        reset(defaultValue);
+    };
 
     useEffect (() => {
-        if (log?.loginState.login === 'success') {
-           history.push('/chat');
-        }
-    }, []);
-
-    useEffect (() => {
-        if (log.loginState.login === 'success') {
+        if (state.loginState.login === 'success') {
             history.push('/chat');
         } reset(defaultValue);
-    }, [log.loginState.login]);
-
-    const submit = (data) => {
-        loginRequest(data);
-    }
+    }, [state.loginState.login])
 
     return(
         <center>
-            <h1>Sign in</h1>
+            <h1>Sign up</h1>
             <hr/>
             <form onSubmit={handleSubmit(submit)}>
                 <br/>
@@ -43,15 +34,15 @@ const Login = ({ log, apiRequestGetuser, loginRequest }) => {
                 {errors.username && (<p>bad input</p>)}
                 <br/>
                 <br/>
-                <input type={'submit'} value={'Submit'}/>
+                <input type={'submit'} value={'create'}/>
             </form>
             <br/>
             <br/>
-            No account
+            back to
             <br/>
-            <Link to={'/signup'}>Sign up</Link>
+            <Link to={'/'}>sign in</Link>
         </center>
     );
 }
 
-export default Login;
+export default Signup;

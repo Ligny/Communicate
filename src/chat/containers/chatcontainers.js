@@ -1,4 +1,4 @@
- import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import Chat from './../components/ChatComponent';
 import { logOutRequest } from './../../login/actions/loginaction';

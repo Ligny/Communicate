@@ -11,7 +11,7 @@ import {loginSuccess,
 
 const onSubmit = (register, data) => {
     
-    const found = register.find(item => item.username === data.username && item.password === data.password);
+    const found = register.find(item => item.username === data.username);
     if (found) {
         return true
     } else {

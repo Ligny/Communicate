@@ -7,7 +7,7 @@ import {
 } from './../actions/getuseraction';
 
 const fetchUser = async () => {
-    const res = await fetch('user.json');
+    const res = await fetch('http://localhost:1337/users/');
     const data = await res.json();
     return data;
 };

@@ -10,7 +10,8 @@ import {
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import Login from './login/containers/logincontainer';
-import Chat from './chat/containers/chatcontainers'
+import Chat from './chat/containers/chatcontainers';
+import Signup from './signup/containers/signupcontainer';
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -36,6 +37,7 @@ ReactDOM.render(
         <PersistGate loading={null} persistor={persistor}>
           <Switch>
             <PrivateRoute path={'/chat'} component={Chat}/>
+            <Route path={'/signup'} component={Signup}/>
             <Route path={'/'} component={Login}/>
           </Switch>
         </PersistGate>
