@@ -3,7 +3,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     LOGOUT,
-    LOGOUT_REQUEST
+    LOGOUT_REQUEST,
+    SIGNUP_REQUEST,
+    SIGNUP_EXIST
 } from './../actions/loginaction';
 
 const initialState = {
@@ -45,6 +47,18 @@ export default function FetchingLog(state = initialState, action) {
                 ...state,
                 login: 'logout',
                 user: ''
+            };
+        }
+        case SIGNUP_REQUEST: {
+            return {
+                ...state,
+                login: 'loading',
+            };
+        }
+        case SIGNUP_EXIST: {
+            return {
+                ...state,
+                login: 'exist',
             };
         }
         default:

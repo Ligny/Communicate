@@ -21,7 +21,8 @@ const Signup = ({ state, signupRequest }) => {
     useEffect (() => {
         if (state.loginState.login === 'success') {
             history.push('/chat');
-        } reset(defaultValue);
+        } else if (state.signupState.signup === 'exist') {}
+        reset(defaultValue);
     }, [state.loginState.login])
 
     return(

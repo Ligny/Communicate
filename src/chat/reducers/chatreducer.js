@@ -1,4 +1,7 @@
 import {
+    REQUEST_GET_MESSAGE,
+    REQUEST_GET_MESSAGE_SUCCESS,
+    REQUEST_GET_MESSAGE_FAILURE,
     ADD_MESSAGE,
     DELETE_MESSAGE,
     REQUEST_ADD_MESSAGE,
@@ -13,6 +16,26 @@ const initialState = {
 
 export default function FetchingStateUser(state = initialState, action) {
     switch (action.type) {
+        case REQUEST_GET_MESSAGE: {
+            return {
+                ...state,
+                status: 'get_message_request',
+            };
+        }
+        case REQUEST_GET_MESSAGE_SUCCESS: {
+            const { message } = action.payload;
+            return {
+                ...state,
+                message: [...message],
+                status: 'get_message_success',
+            };
+        }
+        case REQUEST_GET_MESSAGE_FAILURE: {
+            return {
+                ...state,
+                status: 'get_message_fail',
+            };
+        }
         case REQUEST_ADD_MESSAGE: {
             return {
                 ...state,
@@ -21,10 +44,9 @@ export default function FetchingStateUser(state = initialState, action) {
         }
         case ADD_MESSAGE: {
             const { message } = action.payload;
-            state.message.push(message);
             return {
                 ...state,
-                message: state.message,
+                message: [...message],
                 status: 'message_sent',
             };
         }
@@ -36,10 +58,9 @@ export default function FetchingStateUser(state = initialState, action) {
         }
         case DELETE_MESSAGE: {
             const { message } = action.payload;
-            state.message.splice(message, 1);
             return {
                 ...state,
-                message: state.message,
+                message: [...message],
                 status: 'message_deleted',
             };
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -7,10 +7,14 @@ const defaultValue = {
     message: '',
 };
 
-const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) => {
+const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage, requestGetMessage }) => {
 
     const { register, handleSubmit, errors, reset } = useForm();
     const history = useHistory();
+
+    useEffect(() => {
+        requestGetMessage();
+    }, []);
 
     const memoizedList = useMemo(() => {
         const conv = elem.messageState.message;
@@ -19,7 +23,7 @@ const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) 
                 <hr/>
                 <h4>{item.username}</h4>
                 <h5>{item.message}</h5>
-                <button onClick={() => handleDelete(key, item.username)}>Delete</button>
+                <button onClick={() => handleDelete(item.id, item.username)}>Delete</button>
                 <hr/>
             </div>
         ));
@@ -45,7 +49,6 @@ const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) 
         <center>
             <h1>Chat</h1>
             <br/>
-            <button onClick={handleLogout}>Log out</button>
             <hr/>
             {memoizedList}
             <form onSubmit={handleSubmit(submit)}>
@@ -54,6 +57,8 @@ const Chat = ({ elem, logOutRequest, requestAddMessage, requestDeleteMessage }) 
                 <br/>
                 <input type={'submit'} value={'-        send        -'}/>
             </form>
+            <br/>
+            <button onClick={handleLogout}>Log out</button>
         </center>
     )
 };

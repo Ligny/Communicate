@@ -2,20 +2,13 @@ import {
     call,
     put,
     takeLatest,
-    select
 } from 'redux-saga/effects';
 import {
-    signupSuccess,
-    signupFailure,
+    loginSuccess,
+    loginFailure,
     signupExist,
     SIGNUP_REQUEST
-} from './../actions/signupaction';
-
-
-const modifyLog = (logState, username) => {
-    logState.login = 'success';
-    logState.user = username;
-}
+} from './../../login/actions/loginaction';
 
 const onSignup = async(data) => {
     const res = await fetch('http://localhost:1337/users/');
@@ -38,12 +31,10 @@ function *SagaSignup (action) {
         if (exist === true) {
             yield put(signupExist());
         } else {
-            const State = yield select();
-            yield call (modifyLog, State.loginState, data.username);
-            yield put(signupSuccess());
+            yield put(loginSuccess());
         }
     } catch (error) {
-        yield put(signupFailure());
+        yield put(loginFailure());
     }   
 }
 
